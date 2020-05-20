@@ -8,19 +8,19 @@
 
     <div class='card'>
         <div class='card-header'>
-            <h5>Inserisci nuovo elemento</h5>
+            <h5>Modifica elemento</h5>
         </div>
         <div class='card-body'>
 
             <h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
 
-            <form (ngSubmit)="save(autoreForm)" #autoreForm="ngForm" novalidate>
+            <form (ngSubmit)="update(autoreForm)" #autoreForm="ngForm" novalidate>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Nome <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Inserire il nome" required minlength="2"
-                            id="nome" name="nome" [(ngModel)]="autore.nome" #nomeVar="ngModel"
+                            id="nome" name="nome" [(ngModel)]="selectedAutore.nome" #nomeVar="ngModel"
                             [ngClass]="{'is-invalid': (nomeVar.touched || nomeVar.dirty) && !nomeVar.valid }">
                         <span class="invalid-feedback">
                             <span *ngIf="nomeVar.errors?.required">
@@ -35,7 +35,7 @@
                     <div class="form-group col-md-6">
                         <label>Cognome <span class="text-danger">*</span></label>
                         <input type="text" id="cognome" class="form-control" placeholder="Inserire il cognome" required
-                            minlength="2" name="cognome" [(ngModel)]="autore.cognome" #cognomeVar="ngModel"
+                            minlength="2" name="cognome" [(ngModel)]="selectedAutore.cognome" #cognomeVar="ngModel"
                             [ngClass]="{'is-invalid': (cognomeVar.touched || cognomeVar.dirty) && !cognomeVar.valid }">
                         <span class="invalid-feedback">
                             <span *ngIf="cognomeVar.errors?.required">
@@ -52,8 +52,8 @@
                     <div class="form-group col-md-3">
                         <label>Data di nascita<span class="text-danger">*</span></label>
                         <input class="form-control" id="dataNascita" type="date" placeholder="dd/MM/yy"
-                            title="formato : gg/mm/aaaa" required name="dataNascita" [(ngModel)]="autore.dataNascita"
-                            #dataNascitaVar="ngModel"
+                            title="formato : gg/mm/aaaa" required name="dataNascita" [(ngModel)]="dataNascitaString"
+                            #dataNascitaVar="ngModel" 
                             [ngClass]="{'is-invalid': (dataNascitaVar.touched || dataNascitaVar.dirty) && !dataNascitaVar.valid }">
                         <span class="invalid-feedback">
                             <span *ngIf="!dataNascitaVar.valid">
@@ -65,7 +65,7 @@
                     <div class="form-group col-md-9">
                         <label>Nazionalità <span class="text-danger">*</span></label>
                         <select id="nazionalita" class="form-control" required name="nazionalita"
-                            [(ngModel)]="autore.nazionalita" #nazionalitaVar="ngModel"
+                            [(ngModel)]="selectedAutore.nazionalita" #nazionalitaVar="ngModel"
                             [ngClass]="{'is-invalid': (nazionalitaVar.touched || nazionalitaVar.dirty) && !nazionalitaVar.valid }">
                             <option value=""> - Selezionare - </option>
                             <option value="FRA">Francese</option>
@@ -87,14 +87,14 @@
                         <p>In Attività <span class="text-danger">*</span>:</p>
                         <div class="form-check-inline ml-1">
                             <input class="form-check-input" type="radio" id="inAttivitaTrueId" [value]="true" required
-                                name="inAttivita" [(ngModel)]="autore.inAttivita">
+                                name="inAttivita" [(ngModel)]="selectedAutore.inAttivita">
                             <label class="form-check-label" for="inAttivitaTrueId">
                                 SI
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <input class="form-check-input" type="radio" id="inAttivitaFalseId" [value]="false" required
-                                name="inAttivita" [(ngModel)]="autore.inAttivita">
+                                name="inAttivita" [(ngModel)]="selectedAutore.inAttivita">
                             <label class="form-check-label" for="inAttivitaFalseId">
                                 NO
                             </label>
@@ -106,6 +106,7 @@
                 <button type="submit" [disabled]="!autoreForm.valid" name="submit" value="submit" id="submit"
                     class="btn btn-primary">Conferma</button>
 
+                    
                 <a routerLink="/autore" class='btn btn-secondary ml-2' style='width:80px'>
                     <i class='fa fa-chevron-left'></i> Back
                 </a>
@@ -114,9 +115,8 @@
             </form>
 
 
+
             <!-- end card-body -->
         </div>
     </div>
 </div>
-
-

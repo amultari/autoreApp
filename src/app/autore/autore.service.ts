@@ -20,8 +20,8 @@ export class AutoreService {
 
   getAutori(): Observable<Autore[]> {
     return this.http.get<Autore[]>(this.apiServer).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data)),
-        catchError(this.handleError))
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
     );
 
   }
@@ -32,11 +32,29 @@ export class AutoreService {
     );
   }
 
-  create(autoreInput:Autore): Observable<Autore> {
-    return this.http.post<Autore>(this.apiServer , JSON.stringify(autoreInput), this.httpOptions)
+  create(autoreInput: Autore): Observable<Autore> {
+    return this.http.post<Autore>(this.apiServer, JSON.stringify(autoreInput), this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )
+  }
+
+  edit(idAutoreInput: number): Observable<Autore> {
+    return this.http.get<Autore>(this.apiServer + '/' + idAutoreInput.toString() + '/edit').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  update(autoreInput: Autore): Observable<Autore> {
+    return this.http.put<Autore>(this.apiServer + '/' + autoreInput.id.toString(),autoreInput,this.httpOptions ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  delete(autoreInput: Autore): Observable<Autore> {
+    return this.http.delete<Autore>(this.apiServer + '/' + autoreInput.id.toString(),this.httpOptions ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(err: HttpErrorResponse) {
@@ -50,6 +68,9 @@ export class AutoreService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+      err.error?.errors?.forEach(element => {
+        errorMessage +=element.message;
+      });
     }
     console.error(errorMessage);
     return throwError(errorMessage);

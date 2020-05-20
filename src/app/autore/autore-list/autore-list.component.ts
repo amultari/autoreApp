@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Autore } from '../autore';
 import { AutoreService } from '../autore.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-autore-list',
@@ -9,16 +10,29 @@ import { AutoreService } from '../autore.service';
 })
 export class AutoreListComponent implements OnInit {
 
-  constructor(private autoreService: AutoreService) { }
+  constructor(private route: ActivatedRoute, private autoreService: AutoreService) { }
 
   errorMessage: string = '';
+  confirmMessage: string = '';
   autori: Autore[];
 
   ngOnInit(): void {
     this.autoreService.getAutori().subscribe(
       autoriItem => this.autori = autoriItem,
-      err => this.errorMessage = err
+      err => {
+        this.errorMessage = err,
+          this.autori = [];
+      }
     );
+
+    //verifico presenza messaggio nei query params
+    this.route
+      .queryParams
+      .subscribe(params => {
+        // se non è presente il confirmMessage non faccio nulla
+        console.log('query params...' + params['confirmMessage'])
+        this.confirmMessage = params['confirmMessage'] ? params['confirmMessage'] : '';
+      });
   }
 
 }

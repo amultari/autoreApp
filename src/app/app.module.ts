@@ -11,6 +11,9 @@ import { AutoreListComponent } from './autore/autore-list/autore-list.component'
 import { HttpClientModule }    from '@angular/common/http';
 import { AutoreDetailComponent } from './autore/autore-detail/autore-detail.component';
 import { AutoreCreateComponent } from './autore/autore-create/autore-create.component';
+import { AutoreEditComponent } from './autore/autore-edit/autore-edit.component';
+import { DatePipe } from '@angular/common';
+import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.component';
 
 
 
@@ -23,7 +26,9 @@ import { AutoreCreateComponent } from './autore/autore-create/autore-create.comp
     WelcomeComponent,
     AutoreListComponent,
     AutoreDetailComponent,
-    AutoreCreateComponent
+    AutoreCreateComponent,
+    AutoreEditComponent,
+    AutoreDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ import { AutoreCreateComponent } from './autore/autore-create/autore-create.comp
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
