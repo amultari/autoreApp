@@ -20,8 +20,8 @@ export class AutoreListComponent implements OnInit {
     this.autoreService.getAutori().subscribe(
       autoriItem => this.autori = autoriItem,
       err => {
-        this.errorMessage = err,
-          this.autori = [];
+        this.errorMessage = err;
+        this.autori = [];
       }
     );
 

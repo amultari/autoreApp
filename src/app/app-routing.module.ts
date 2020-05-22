@@ -7,9 +7,12 @@ import { AutoreDetailComponent } from './autore/autore-detail/autore-detail.comp
 import { AutoreCreateComponent } from './autore/autore-create/autore-create.component';
 import { AutoreEditComponent } from './autore/autore-edit/autore-edit.component';
 import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.component';
+import { AutoreService } from './autore/autore.service';
+import { AutoreSearchComponent } from './autore/autore-search/autore-search.component';
 
 const routes: Routes = [
   { path: 'autore', component: AutoreListComponent },
+  { path: 'autore/search', component: AutoreSearchComponent },
   { path: 'autore/create', component: AutoreCreateComponent },
   { path: 'autore/edit/:id', component: AutoreEditComponent },
   { path: 'autore/delete/:id', component: AutoreDeleteComponent },

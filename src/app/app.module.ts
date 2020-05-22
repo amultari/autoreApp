@@ -14,6 +14,8 @@ import { AutoreCreateComponent } from './autore/autore-create/autore-create.comp
 import { AutoreEditComponent } from './autore/autore-edit/autore-edit.component';
 import { DatePipe } from '@angular/common';
 import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.component';
+import { AutoreSearchComponent } from './autore/autore-search/autore-search.component';
+import { AutoreSearchResultsComponent } from './autore/autore-search-results/autore-search-results.component';
 
 
 
@@ -28,7 +30,9 @@ import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.comp
     AutoreDetailComponent,
     AutoreCreateComponent,
     AutoreEditComponent,
-    AutoreDeleteComponent
+    AutoreDeleteComponent,
+    AutoreSearchComponent,
+    AutoreSearchResultsComponent
   ],
   imports: [
     BrowserModule,
