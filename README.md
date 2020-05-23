@@ -4,11 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 
-=== It uses ngx-pagination for paginating results
-[indent=0]
-----
+It uses `ngx-pagination` for paginating results
+```
 npm install ngx-pagination --save
-----
+```
 
 ## Development server
 
