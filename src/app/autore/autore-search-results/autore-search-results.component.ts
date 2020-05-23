@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Autore } from '../autore';
 
 @Component({
@@ -8,10 +8,19 @@ import { Autore } from '../autore';
 })
 export class AutoreSearchResultsComponent implements OnInit {
   @Input() searchResultInput: Autore[];
+  @Input() searchResultInputCount: number;
+  @Input() currentPageInput: number;
+  @Input() itemsPerPageInput: number;
+
+  @Output() nextPage = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  pageChanged(nextPageFromInput: number) {
+    this.nextPage.emit(nextPageFromInput);
   }
 
 }

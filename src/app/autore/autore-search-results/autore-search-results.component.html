@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let autoreItem of searchResultInput">
+                        <tr *ngFor="let autoreItem of searchResultInput | paginate: { itemsPerPage: itemsPerPageInput, currentPage: currentPageInput, totalItems: searchResultInputCount }">
                             <td>{{autoreItem.nome}}</td>
                             <td>{{autoreItem.cognome}}</td>
                             <td>{{autoreItem.dataNascita | date:'dd/MM/yyyy'}}</td>
@@ -32,8 +32,8 @@
                             </td>
                         </tr>
                     </tbody>
-
                 </table>
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
             </div>
 
             <!-- end card-body -->
