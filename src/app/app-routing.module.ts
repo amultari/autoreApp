@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { AutoreListComponent } from './autore/autore-list/autore-list.component';
-import { AutoreDetailComponent } from './autore/autore-detail/autore-detail.component';
 import { AutoreCreateComponent } from './autore/autore-create/autore-create.component';
-import { AutoreEditComponent } from './autore/autore-edit/autore-edit.component';
 import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.component';
-import { AutoreService } from './autore/autore.service';
+import { AutoreDetailComponent } from './autore/autore-detail/autore-detail.component';
+import { AutoreEditComponent } from './autore/autore-edit/autore-edit.component';
+import { AutoreListComponent } from './autore/autore-list/autore-list.component';
 import { AutoreSearchComponent } from './autore/autore-search/autore-search.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   { path: 'autore', component: AutoreListComponent },
