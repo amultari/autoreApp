@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 
-It uses `ngx-pagination` for paginating results
+It uses `ngx-pagination` for paginating results, already installed by executing the following command:
 ```
 npm install ngx-pagination --save
 ```
