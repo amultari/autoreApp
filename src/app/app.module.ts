@@ -17,6 +17,8 @@ import { AutoreDeleteComponent } from './autore/autore-delete/autore-delete.comp
 import { AutoreSearchComponent } from './autore/autore-search/autore-search.component';
 import { AutoreSearchResultsComponent } from './autore/autore-search-results/autore-search-results.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -39,6 +41,7 @@ import { AutoreSearchResultsComponent } from './autore/autore-search-results/aut
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
