@@ -28,7 +28,7 @@ export class AutoreDeleteComponent implements OnInit {
     this.autoreService.delete(autoreInput).subscribe(
       () => { },
       err => this.errorMessage = err,
-      () => this.router.navigate(['/autore'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
+      () => this.router.navigate(['/autore/search'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
     );
   }
 

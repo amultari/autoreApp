@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AutoreSearchComponent implements OnInit {
   errorMessage: string = '';
+  confirmMessage: string = '';
   //bean usato per il form
   autoreSearch: Autore;
   //lista di risultati di cui fare il display nel nested component
@@ -32,13 +33,15 @@ export class AutoreSearchComponent implements OnInit {
 
   ngOnInit(): void {
     let stoTornandoIndietroDaSottofunzione: boolean = false;
-    //verifico presenza parametro che mi dice che sto tornando indietro da una sottofunzione
+    //verifico presenza parametro che mi dice che sto tornando indietro da una sottofunzione oppure del messagio di conferma
     this.route
       .queryParams
       .subscribe(params => {
         // se non è presente il _backFromSubFunction_ non faccio nulla
         console.log('query params...' + params['_backFromSubFunction_'])
-        stoTornandoIndietroDaSottofunzione = params['_backFromSubFunction_'] ? true : false;
+        stoTornandoIndietroDaSottofunzione = params['_backFromSubFunction_'] && params['_backFromSubFunction_'] === "true" ? true : false;
+        // se non è presente il confirmMessage non faccio nulla
+        this.confirmMessage = params['confirmMessage'] ? params['confirmMessage'] : '';
       });
 
     if (!stoTornandoIndietroDaSottofunzione) {
@@ -82,6 +85,11 @@ export class AutoreSearchComponent implements OnInit {
     const queryParams: Map<string, string> = new Map<string, string>(Object.entries(this.autoreSearch));
     queryParams.set('offset', this.offset.toString());
     queryParams.set('max', this.getMaxPerPage().toString());
+
+    //TODO gestire ordine e sorting
+    queryParams.set('sort', 'nome');
+    queryParams.set('order', 'asc');
+
     this.autoreService.searchAutori(queryParams).subscribe(
       searchResultsItem => {
         this.searchResults = searchResultsItem.autoreList;

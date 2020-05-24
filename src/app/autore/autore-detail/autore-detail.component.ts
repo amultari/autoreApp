@@ -15,6 +15,7 @@ export class AutoreDetailComponent implements OnInit {
 
   selectedAutore: Autore;
   errorMessage: string = '';
+  confirmMessage: string = '';
 
   ngOnInit(): void {
     let idParam = +this.route.snapshot.paramMap.get('id');
@@ -24,7 +25,15 @@ export class AutoreDetailComponent implements OnInit {
         console.log(JSON.stringify(autoreItem))
       },
       err => this.errorMessage = err
-    )
+    );
+
+    //verifico presenza messaggio nei query params
+    this.route
+      .queryParams
+      .subscribe(params => {
+        // se non è presente il confirmMessage non faccio nulla
+        this.confirmMessage = params['confirmMessage'] ? params['confirmMessage'] : '';
+      });
   }
 
 }
