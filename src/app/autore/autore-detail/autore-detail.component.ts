@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Autore } from '../autore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Autore } from '../autore';
 import { AutoreService } from '../autore.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AutoreService } from '../autore.service';
 export class AutoreDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private autoreService: AutoreService,
-    private router:Router) { }
+    private router: Router) { }
 
   selectedAutore: Autore;
   errorMessage: string = '';
@@ -25,10 +25,6 @@ export class AutoreDetailComponent implements OnInit {
       },
       err => this.errorMessage = err
     )
-  }
-
-  onBack(): void {
-    this.router.navigate(['/autore']);
   }
 
 }
