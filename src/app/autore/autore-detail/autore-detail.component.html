@@ -48,10 +48,12 @@
         </div>
 
         <div class='card-footer'>
-            <a routerLink="/autore/search" [queryParams]="{_backFromSubFunction_:confirmMessage?false:true}"
-                class='btn btn-outline-secondary' style='width:80px'>
-                <i class='fa fa-chevron-left'></i> Back
-            </a>
+            <a *ngIf="confirmMessage else elseBlock" routerLink="/autore/search"
+                [queryParams]="{_backFromSubFunction_:false}" class='btn btn-outline-secondary'>Torna alla ricerca</a>
+            <ng-template #elseBlock>
+                <a routerLink="/autore/search" [queryParams]="{_backFromSubFunction_:true}"
+                    class='btn btn-outline-secondary'>Torna ai risultati</a>
+            </ng-template>
         </div>
     </div>
 </div>
