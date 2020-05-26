@@ -2,9 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
+It uses bootstrap installed by the following:
+```
+npm install bootstrap jquery popper
+```
+and then set up angular.json like this (order matters!!!!):
+```
+ 			"styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+```
 
-
-It uses `ngx-pagination` for paginating results, installed by executing the following command:
+It also uses `ngx-pagination` for paginating results, installed by executing the following command:
 ```
 npm install ngx-pagination --save
 ```
