@@ -18,8 +18,16 @@ export class AutoreService {
 
   constructor(private http: HttpClient) { }
 
+  //questo metodo viene usato dal list ed è fatto in modo da caricare 100 elementi (senza paginazione)
+  //se non viene specificato il max l'api rest ne espone solo 10 e non verrebbero caricate le altre voci
+  //inoltre vengono ordinati i risultati per nome ascendente
   getAutori(): Observable<Autore[]> {
-    return this.http.get<Autore[]>(this.apiServer).pipe(
+    let httpParams = new HttpParams();
+    httpParams = httpParams.set('max', '100');
+    httpParams = httpParams.set('offeset', '0');
+    httpParams = httpParams.set('sort', 'nome');
+    httpParams = httpParams.set('order', 'asc');
+    return this.http.get<Autore[]>(this.apiServer, { params: httpParams }).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

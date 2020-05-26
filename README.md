@@ -4,10 +4,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 
-It uses `ngx-pagination` for paginating results, already installed by executing the following command:
+It uses `ngx-pagination` for paginating results, installed by executing the following command:
 ```
 npm install ngx-pagination --save
 ```
+
+Unfortunatelly, there is no sorting/ordering functionality in tables because it's not included in ngx-pagination.
 
 ## Development server
 
