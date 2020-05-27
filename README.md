@@ -24,6 +24,10 @@ npm install ngx-pagination --save
 ```
 
 Unfortunatelly, there is no sorting/ordering functionality in tables because it's not included in ngx-pagination.
+The autore-search-list component is the one used for paginating results. autore-list component is left there just as a list component template with no pagination.
+
+The project uses a real backend API made in Grails 4. You can find it at https://github.com/amultari/helloworld_grails4
+Once you run up it listens on (unless you change ip address and port): localhost:8080/gestioneautore/api/autore 
 
 ## Development server
 
