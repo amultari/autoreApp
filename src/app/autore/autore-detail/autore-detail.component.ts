@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Autore } from '../autore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Autore } from '../autore';
 import { AutoreService } from '../autore.service';
 
 @Component({
@@ -11,10 +11,11 @@ import { AutoreService } from '../autore.service';
 export class AutoreDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private autoreService: AutoreService,
-    private router:Router) { }
+    private router: Router) { }
 
   selectedAutore: Autore;
   errorMessage: string = '';
+  confirmMessage: string = '';
 
   ngOnInit(): void {
     let idParam = +this.route.snapshot.paramMap.get('id');
@@ -24,11 +25,15 @@ export class AutoreDetailComponent implements OnInit {
         console.log(JSON.stringify(autoreItem))
       },
       err => this.errorMessage = err
-    )
-  }
+    );
 
-  onBack(): void {
-    this.router.navigate(['/autore']);
+    //verifico presenza messaggio nei query params
+    this.route
+      .queryParams
+      .subscribe(params => {
+        // se non è presente il confirmMessage non faccio nulla
+        this.confirmMessage = params['confirmMessage'] ? params['confirmMessage'] : '';
+      });
   }
 
 }

@@ -1,0 +1,42 @@
+<div class="container" *ngIf="searchResultInput && searchResultInput.length > 0">
+
+    <div class='card'>
+        <div class='card-body'>
+
+            <div class='table-responsive'>
+                <table class='table table-striped '>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Data di Nascita</th>
+                            <th>Nazionalità</th>
+                            <th>In attività</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let autoreItem of searchResultInput | paginate: { itemsPerPage: itemsPerPageInput, currentPage: currentPageInput, totalItems: searchResultInputCount }">
+                            <td>{{autoreItem.nome}}</td>
+                            <td>{{autoreItem.cognome}}</td>
+                            <td>{{autoreItem.dataNascita | date:'dd/MM/yyyy'}}</td>
+                            <td>{{autoreItem.nazionalita}}</td>
+                            <td>{{autoreItem.inAttivita?'SI':'NO'}}</td>
+                            <td>
+                                <a class="btn  btn-sm btn-outline-secondary"
+                                    [routerLink]="['/autore', autoreItem.id]">Visualizza</a>
+                                <a class="btn  btn-sm btn-outline-primary ml-2 mr-2"
+                                    [routerLink]="['/autore/edit', autoreItem.id]">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm"
+                                    [routerLink]="['/autore/delete', autoreItem.id]">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+
+            <!-- end card-body -->
+        </div>
+    </div>
+</div>

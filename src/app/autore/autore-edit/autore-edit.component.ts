@@ -32,18 +32,9 @@ export class AutoreEditComponent implements OnInit {
   }
 
   update(autoreForm: NgForm): void {
-    // console.log('eccomi.............')
-    // console.log('sub ' + JSON.stringify(this.selectedAutore));
-    // console.log('Errori ' + autoreForm.form.controls);
-    // console.log('touched ' + autoreForm.touched);
-    // console.log('valid ' + autoreForm.form.valid);
-
     const dataNascitaStringParsed = new Date(this.dataNascitaString);
     this.selectedAutore.dataNascita = dataNascitaStringParsed;
-    // console.log('dataNascitaString ' + this.dataNascitaString);
-    // console.log('parsed...' + dataNascitaStringParsed);
-    // console.log('ritrasformata...' + this.datePipe.transform(this.selectedAutore.dataNascita, 'yyyy-MM-dd'))
-    // console.log('sub ' + JSON.stringify(this.selectedAutore));
+
     if (autoreForm.valid) {
       this.autoreService.update(this.selectedAutore).subscribe(
         autoreItem => {
@@ -51,7 +42,7 @@ export class AutoreEditComponent implements OnInit {
           this.selectedAutore = autoreItem;
         },
         err => this.errorMessage = err,
-        () => this.router.navigate(['/autore'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
+        () => this.router.navigate([`/autore/${this.selectedAutore.id}`], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
       );
     } else {
       this.errorMessage = 'Attenzione! Operazione fallita! Il form non è stato validato'

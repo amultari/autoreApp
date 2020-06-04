@@ -1,0 +1,99 @@
+<div class="container">
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div *ngIf="confirmMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{confirmMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class='card'>
+        <div class='card-header'>
+            <h5>Ricerca Elementi</h5>
+        </div>
+        <div class='card-body'>
+
+            <form (ngSubmit)="search(autoreSearchForm)" #autoreSearchForm="ngForm" novalidate>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Nome </label>
+                        <input type="text" class="form-control" placeholder="Inserire il nome" minlength="2" id="nome"
+                            name="nome" [(ngModel)]="autoreSearch.nome" #nomeVar="ngModel">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Cognome </label>
+                        <input type="text" id="cognome" class="form-control" placeholder="Inserire il cognome"
+                            minlength="2" name="cognome" [(ngModel)]="autoreSearch.cognome" #cognomeVar="ngModel">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Data di nascita</label>
+                        <input class="form-control" id="dataNascita" type="date" placeholder="dd/MM/yy"
+                            title="formato : gg/mm/aaaa" name="dataNascita" [(ngModel)]="autoreSearch.dataNascita"
+                            #dataNascitaVar="ngModel">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Nazionalità </label>
+                        <select id="nazionalita" class="form-control" name="nazionalita"
+                            [(ngModel)]="autoreSearch.nazionalita" #nazionalitaVar="ngModel">
+                            <option value=""> - Selezionare - </option>
+                            <option value="FRA">Francese</option>
+                            <option value="ENG">Inglese</option>
+                            <option value="ITA">Italia</option>
+                            <option value="USA">Stati Uniti</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <p>In Attività :</p>
+                        <div class="form-check-inline ml-1">
+                            <input class="form-check-input" type="radio" id="inAttivitaTrueId" [value]="true"
+                                name="inAttivita" [(ngModel)]="autoreSearch.inAttivita">
+                            <label class="form-check-label" for="inAttivitaTrueId">
+                                SI
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" id="inAttivitaFalseId" [value]="false"
+                                name="inAttivita" [(ngModel)]="autoreSearch.inAttivita">
+                            <label class="form-check-label" for="inAttivitaFalseId">
+                                NO
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" id="inAttivitaFalseId" [value]="null"
+                                name="inAttivita" [(ngModel)]="autoreSearch.inAttivita">
+                            <label class="form-check-label" for="inAttivitaFalseId">
+                                Entrambi
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Ricerca</button>
+                <button type="button" (click)="resetForm()" class="btn btn-secondary ml-2">Ripulisci Form</button>
+                <button type="button" (click)="resetResults()" class="btn btn-secondary ml-2">Ripulisci
+                    Risultati</button>
+                <a class="btn btn-outline-primary ml-2" [routerLink]="['/autore/create']">Add New</a>
+
+
+            </form>
+
+
+            <!-- end card-body -->
+        </div>
+    </div>
+</div>
+<app-autore-search-results [searchResultInput]="searchResults" [searchResultInputCount]="autoreCount"
+    [currentPageInput]="currentPage" [itemsPerPageInput]="getMaxPerPage()" (nextPage)="nextPage($event)"></app-autore-search-results>

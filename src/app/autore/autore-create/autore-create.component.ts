@@ -25,10 +25,11 @@ export class AutoreCreateComponent implements OnInit {
     if (autoreForm.valid) {
       this.autoreService.create(this.autore).subscribe(
         autoreItem => {
+          this.autore = autoreItem;
           console.log('inserito ' + JSON.stringify(autoreItem))
         },
         err => this.errorMessage = err,
-        () => this.router.navigate(['/autore'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
+        () => this.router.navigate([`/autore/${this.autore.id}`], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
       );
     } else {
       this.errorMessage = 'Attenzione! Operazione fallita! Il form non è stato validato'

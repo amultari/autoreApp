@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AutoreService } from '../autore.service';
 import { Autore } from '../autore';
+import { AutoreService } from '../autore.service';
 
 @Component({
   selector: 'app-autore-delete',
@@ -26,14 +26,10 @@ export class AutoreDeleteComponent implements OnInit {
   delete(autoreInput: Autore): void {
     console.log('Autore da eliminare...' + JSON.stringify(autoreInput));
     this.autoreService.delete(autoreInput).subscribe(
-      () => {},
+      () => { },
       err => this.errorMessage = err,
-      () => this.router.navigate(['/autore'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
+      () => this.router.navigate(['/autore/search'], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
     );
-  }
-
-  onBack(): void {
-    this.router.navigate(['/autore']);
   }
 
 }

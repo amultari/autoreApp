@@ -18,8 +18,29 @@ export class AutoreService {
 
   constructor(private http: HttpClient) { }
 
+  //questo metodo viene usato dal list ed è fatto in modo da caricare 100 elementi (senza paginazione)
+  //se non viene specificato il max l'api rest ne espone solo 10 e non verrebbero caricate le altre voci
+  //inoltre vengono ordinati i risultati per nome ascendente
   getAutori(): Observable<Autore[]> {
-    return this.http.get<Autore[]>(this.apiServer).pipe(
+    let httpParams = new HttpParams();
+    httpParams = httpParams.set('max', '100');
+    httpParams = httpParams.set('offeset', '0');
+    httpParams = httpParams.set('sort', 'nome');
+    httpParams = httpParams.set('order', 'asc');
+    return this.http.get<Autore[]>(this.apiServer, { params: httpParams }).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+
+  }
+
+  searchAutori(queryParams: Map<string, string>): Observable<any> {
+    let httpParams = new HttpParams();
+    queryParams.forEach((value: string, key: string) => {
+      if (value !==null && value !== undefined)
+        httpParams = httpParams.set(key, value);
+    });
+    return this.http.get<any>(this.apiServer + '/search', { params: httpParams }).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
@@ -46,13 +67,13 @@ export class AutoreService {
   }
 
   update(autoreInput: Autore): Observable<Autore> {
-    return this.http.put<Autore>(this.apiServer + '/' + autoreInput.id.toString(),autoreInput,this.httpOptions ).pipe(
+    return this.http.put<Autore>(this.apiServer + '/' + autoreInput.id.toString(), autoreInput, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   delete(autoreInput: Autore): Observable<Autore> {
-    return this.http.delete<Autore>(this.apiServer + '/' + autoreInput.id.toString(),this.httpOptions ).pipe(
+    return this.http.delete<Autore>(this.apiServer + '/' + autoreInput.id.toString(), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -69,7 +90,7 @@ export class AutoreService {
       // The response body may contain clues as to what went wrong,
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
       err.error?.errors?.forEach(element => {
-        errorMessage +=element.message;
+        errorMessage += element.message;
       });
     }
     console.error(errorMessage);
